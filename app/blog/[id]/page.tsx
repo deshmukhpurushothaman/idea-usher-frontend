@@ -1,4 +1,3 @@
-import { Chip } from '@mui/material';
 import { Metadata } from 'next';
 
 export async function generateMetadata({
@@ -12,8 +11,8 @@ export async function generateMetadata({
   const blog = await res.json();
 
   return {
-    title: blog.title,
-    description: blog.description,
+    title: blog.blog.title,
+    description: blog.blog.description,
   };
 }
 
@@ -29,7 +28,7 @@ export default async function BlogPage({ params }: { params: { id: string } }) {
   const { blog } = await fetchBlogData(params.id);
 
   return (
-    <div className="container mx-auto mt-8">
+    <div className="container mx-auto my-8">
       <img
         src={blog.photo_url}
         alt={blog.title}
@@ -40,14 +39,16 @@ export default async function BlogPage({ params }: { params: { id: string } }) {
         <p className="text-gray-500 text-sm mb-4">
           {new Date(blog.created_at).toLocaleDateString()}
         </p>
-        <Chip label={blog.category} color="success" className="p-2 text-lg" />
+        <div className="py-2 px-4 text-lg bg-green-700 rounded-3xl">
+          {blog.category}
+        </div>
       </div>
       <div className="text-2xl font-bold mb-4">Description</div>
       <div className="mb-8">{blog.description}</div>
 
       <div className="text-2xl font-bold mb-4">Content</div>
       <div
-        // className="prose"
+        className="prose"
         dangerouslySetInnerHTML={{ __html: blog.content_html }}
       />
     </div>
