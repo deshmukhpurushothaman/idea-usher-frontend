@@ -1,6 +1,19 @@
 import BlogCard from './BlogCard';
 import Pagination from './Pagination';
 
+export interface PostData {
+  content_text: string;
+  user_id: number;
+  title: string;
+  photo_url: string;
+  created_at: string;
+  id: number;
+  description: string;
+  content_html: string;
+  category: string;
+  updated_at: string;
+}
+
 async function fetchBlogs(page: number, limit: number = 30) {
   const offset = (page - 1) * limit;
   const res = await fetch(
@@ -23,7 +36,7 @@ export default async function BlogList({
     <div>
       {/* Blog Cards */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-        {blogs.map((blog: any) => (
+        {blogs.map((blog: PostData) => (
           <BlogCard key={blog.id} blog={blog} />
         ))}
       </div>

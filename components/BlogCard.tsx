@@ -1,8 +1,9 @@
 'use client';
 import Link from 'next/link';
 import { motion } from 'framer-motion';
+import { PostData } from './BlogList';
 
-export default function BlogCard({ blog }: { blog: any }) {
+export default function BlogCard({ blog }: { blog: PostData }) {
   return (
     <motion.div
       whileHover={{ scale: 1.05 }}
