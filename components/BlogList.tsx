@@ -4,7 +4,7 @@ import Pagination from './Pagination';
 async function fetchBlogs(page: number, limit: number = 30) {
   const offset = (page - 1) * limit;
   const res = await fetch(
-    `https://api.slingacademy.com/v1/sample-data/blog-posts?page=${page}&limit=${limit}&offset=${offset}`,
+    `${process.env.NEXT_PUBLIC_POSTS_BASE_URL}?page=${page}&limit=${limit}&offset=${offset}`,
     { cache: 'no-store' } // Avoid caching for up-to-date results
   );
   const data = await res.json();
